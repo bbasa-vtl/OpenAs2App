@@ -153,6 +153,9 @@ public class XMLSession extends BaseSession {
         Properties.setProperties(properties);
         String appPropsFile = System.getProperty("openas2.properties.file");
         if (appPropsFile != null && appPropsFile.length() > 1) {
+            if (LOGGER.isInfoEnabled()) {
+                LOGGER.info("Loading custom properties file: " + appPropsFile);
+            }
             java.util.Properties appProps = new java.util.Properties();
             FileInputStream fis = null;
             try {
@@ -163,7 +166,6 @@ public class XMLSession extends BaseSession {
                     String key = (String) enuKeys.nextElement();
                     Properties.setProperty(key, appProps.getProperty(key));
                 }
-
             } catch (FileNotFoundException e) {
                 LOGGER.warn("Custom properties file specified but cannot be located:" + appPropsFile);
             } catch (IOException e) {

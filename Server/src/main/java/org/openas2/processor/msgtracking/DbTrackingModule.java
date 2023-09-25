@@ -58,6 +58,9 @@ public class DbTrackingModule extends BaseMsgTrackingModule {
     public void init(Session session, Map<String, String> options) throws OpenAS2Exception {
         super.init(session, options);
         CompositeParameters paramParser = createParser();
+        if (logger.isTraceEnabled()) {
+            logger.trace("Message tracking module initialising with parameters: " + getParameters());
+        }
         dbUser = getParameter(PARAM_DB_USER, true);
         dbPwd = getParameter(PARAM_DB_PWD, true);
         configBaseDir = session.getBaseDirectory();
